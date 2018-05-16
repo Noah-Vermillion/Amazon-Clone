@@ -66,6 +66,6 @@ function itemClicked(){
 }
 
 $(document).ready(function(){
-  loadPage();
-  $('.tempImg').click(itemClicked);
+  // loadPage();
+  // $('.tempImg').click(itemClicked);
 });
