@@ -67,12 +67,7 @@ router.use(function(req, res, next) {
 
 
 router.get("/list",function(request,response){
-	if(request.isAuthenticated()){
-		response.sendFile(__dirname + "/public/views/ListUser.html");
-	}
-	else {
 		response.sendFile(__dirname + "/public/views/List.html");
-	}
 });
 
 router.get("/cartList",function(request,response){
@@ -165,7 +160,7 @@ console.log("get login");
 router.get("/session", function(req, res) {
   console.log("get session");
   if (req.isAuthenticated()) {
-	let thePath = path.resolve(__dirname,"public/views/session.html");
+	let thePath = path.resolve(__dirname,"public/views/Home.html");
 	res.sendFile(thePath);
   } else {
   	let thePath = path.resolve(__dirname,"public/views/login.html");
