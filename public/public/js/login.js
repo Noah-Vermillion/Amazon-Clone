@@ -1,19 +1,21 @@
 
 
 
- 		
+
   		function userClicked(){
 
           $.post("/login",{username:$("#username").val(), password:$("#psw").val()},function(data)
-{
-		window.location = data.redirect;
-});
+          {
+		           window.location = data.redirect;
+          });
 
     			return false;
     		}
+function signupClicked(){
+  window.location = "signup";
+}
 
-
-  		$(document).ready(function(){ 
+  		$(document).ready(function(){
 
         $("#username").keydown( function( event ) {
             if ( event.which === 13 ) {
@@ -22,7 +24,7 @@
               return false;
             }
         });
-        
+
         $("#psw").keydown( function( event ) {
             if ( event.which === 13 ) {
               userClicked();
@@ -31,8 +33,6 @@
             }
         });
 
+      //  $("#createbutton").clicked(signupClicked);
 
-  		});  		
-    
-
-
+  		});

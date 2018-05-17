@@ -67,12 +67,7 @@ router.use(function(req, res, next) {
 
 
 router.get("/list",function(request,response){
-	if(request.isAuthenticated()){
-		response.sendFile(__dirname + "/public/views/ListUser.html");
-	}
-	else {
 		response.sendFile(__dirname + "/public/views/List.html");
-	}
 });
 
 router.get("/cartList",function(request,response){
