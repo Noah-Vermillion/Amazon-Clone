@@ -45,7 +45,7 @@ function previewFile(){
     function()
     {
       $("form").submit(function(event){
-        console.log("The path fiel is = " + tempSrc);
+        console.log("The path file is = " + tempSrc);
         if($("#fileStuff").val() == ""){
           alert("Insert an Img");
           return false;
@@ -68,25 +68,25 @@ function previewFile(){
           } ,
           dataType: "json"
         });
-        $.ajax({
-          url: "/addUserSellItem",
-          type: "POST",
-          //add a path data to the img
-          data: {name:$("#objName").val(),
-                price:$("#objPrice").val(),
-                desc:$("#objDesc").val(),
-                img:tempSrc,
-                category:$("#objCategory").val()},
-          success: function(data){
-            if (!data){
-              alert("ERROR SUBMIT USER");
-              }else{
-                console.log("SUBMIT USER VALID");
-              // alert("SUBMIT VALID");
-            }
-          } ,
-          dataType: "json"
-        });
+        // $.ajax({
+        //   url: "/addUserSellItem",
+        //   type: "POST",
+        //   //add a path data to the img
+        //   data: {name:$("#objName").val(),
+        //         price:$("#objPrice").val(),
+        //         desc:$("#objDesc").val(),
+        //         img:tempSrc,
+        //         category:$("#objCategory").val()},
+        //   success: function(data){
+        //     if (!data){
+        //       alert("ERROR SUBMIT USER");
+        //       }else{
+        //         console.log("SUBMIT USER VALID");
+        //       // alert("SUBMIT VALID");
+        //     }
+        //   } ,
+        //   dataType: "json"
+        // });
       });
       $.ajax({
       url: "/userInfo",
@@ -101,9 +101,8 @@ function previewFile(){
         else
         {
           console.log("I am changing the info");
-          console.log(data.name);
-          document.getElementById("username").innerHTML = data.name;
-          // info.value = data.name;
+          console.log(data.username);
+          $("#username").html( data.username);          // info.value = data.name;
         }
       },
       dataType: "json"

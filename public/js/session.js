@@ -2,9 +2,10 @@
 $(document).ready(function(){
 
 	$.get("/userInfo",function(data){
-		if (data.username){
-			$("#username").href="account";
-			$("#username").html( data.username);
-		}
+		if(data != null)
+			if (data.username){
+				$("#username").attr('href' , "account");
+				$("#username").html( data.username);
+			}
 	});
 });
