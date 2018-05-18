@@ -57,8 +57,10 @@ router.use(function(req, res, next) {
   next();
 });
 
-
-router.get("/list",function(request,response){
+let currCatg;
+router.get("/list/:catg",function(request,response){
+	currCatg = request.params.catg;
+	console.log("This is = " + currCatg);
 	if(request.isAuthenticated()){
 		response.sendFile(__dirname + "/public/views/ListUser.html");
 	}
@@ -245,32 +247,22 @@ router.get("/getItemDB", function(req,res){
 		return(itemDB.getAllItems(res));
 });
 
-
-router.post("/setCategory",function(req,res){//edited
-	if(req.body.spec != null){
-	itemDB.setCurrentCategory(req.body.spec);
-	res.json(req.body.spec);
-	}
-	else
-		res.json(null);
-});
-
 router.get("/getCategory",function(req,res){//edited
-	res.json(itemDB.getCurrentCategory());
+	res.json({category:currCatg});
 });
 
 router.post("/updateItem",function(req,res){//edited
 	if(req.body.name == "" || req.body.price == "" || req.body.price <= 0 || req.body.desc == "")
 		res.json(null);
 	else{
-		itemDB.updateItem(req.body);
+		itemDB.updateItem(req.body,res);
 		res.json(req.body);
 	}
 
 });
 
 router.get("/search",function(req,res){
-	res.json(itemDB.getAllItems());
+	return(itemDB.getAllItems(res));
 });
 
 router.get("/getCurrentItemInfo",function(req,res){

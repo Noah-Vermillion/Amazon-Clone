@@ -1,7 +1,7 @@
 let idClicked;
 let currentCatg;
 
-function loadPage(){//edited
+function getCategory(){//edited
   console.log("I have loaded the page");
 
   $.ajax({
@@ -12,18 +12,25 @@ function loadPage(){//edited
         alert("NO CATEGORY");
       else{
         console.log(data);
-        currentCatg=data;
+        currentCatg=data.category;
+        console.log("-------- " + currentCatg);
+        $("#resHeading").html("Results for " + data.category);
+        loadPage(data.category);
       }
     }
-  })  ;
-  console.log("The current catg=" + currentCatg);
+  });
+  return false;
+}
+
+function loadPage(current){
+  console.log("++++++++++++++ " + current);
   $.ajax({
     url: "/search",
     type: "GET",
     success: function(data){
       for(let i=0;i<data.length;i++){
         if(data[i] != null || data[i] != undefined){
-          if(data[i].category == currentCatg){
+          if(data[i].category == current){
             $("#list").append(
               "<input id='"+ data[i].name +"' class='tempImg' type='image' src= "+ data[i].img +" height='200' width='200' border='5' onClick='changeCurr(this)'/>"
               + "<p class='description'>"
@@ -37,8 +44,6 @@ function loadPage(){//edited
     } ,
     dataType: "json"
   });
-  return false;
-
 }
 
 function changeCurr(e){
@@ -66,6 +71,6 @@ function itemClicked(){
 }
 
 $(document).ready(function(){
-  // loadPage();
+  getCategory();
   // $('.tempImg').click(itemClicked);
 });

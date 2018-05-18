@@ -6,11 +6,22 @@ var myDatabase = function(){
 }
 
 myDatabase.prototype.addObj = function(obj,res){
-	Item.create({name:obj.name}, function(error,info){
+	console.log(obj);
+	Item.create(obj, function(error,info){
 		if(error){
 			return res.json(null);
 		} else {
 			return res.json(obj);
+		}
+	});
+}
+
+myDatabase.prototype.getItem = function(obj,res){
+	Item.findOne({_id:obj.id},function(error,info){
+		if(error){
+			return res.json(null);
+		} else{
+			return res.json(info);
 		}
 	});
 }
@@ -29,6 +40,15 @@ myDatabase.prototype.getAllItems = function(res){
 	});
 }
 
+myDatabase.prototype.updateItem = function(obj,res){
+	Item.findOneAndUpdate({name:obj.name},function(error,info){
+		if(error){
+			return res.json(null);
+		} else{
+			return res.json(obj);
+		}
+	});
+}
 
 
 
