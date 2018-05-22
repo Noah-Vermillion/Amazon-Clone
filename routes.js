@@ -10,7 +10,9 @@ var mongoose = require("mongoose");
 var formidable = require('formidable');
 var fs = require('fs');
 const itemdatabase = require('./itemDatabase');
+const cartdatabase = require('./cartDatabase');
 var itemDB = new itemdatabase();
+var cartDB = new cartdatabase();
 
 /////////database items///////////////edited
 // itemDB.addItem({name:"Xbox One X", price: 449.99, desc:"Latest Gaming console from Microsoft" , img: "/images/xBox.jpg",category:"electronics"});
@@ -40,6 +42,8 @@ var itemDB = new itemdatabase();
 ////////////////////////////////
 
 /////////////////////////////////
+
+
 
 //function ensureAuthenticated(req, res, next) {
 //  if (req.isAuthenticated()) {
@@ -201,8 +205,7 @@ console.log("post signup1");
     var newUser = new User({
       username: username,
       password: password,
-      cartItems: ["Football", "Soccer"],
-      sellItems: []
+      cartItems: []
     });
 console.log("post signup2");
 
@@ -322,10 +325,12 @@ router.post('/addUserItem', function(req, res){
 	if(req.isAuthenticated())
 	{
 		console.log("Inside addUserItem");
-		let item = {name: req.body.name , price: req.body.price,desc:req.body.desc,img:req.body.img,category:req.body.category};
-		req.user.cartItems.push(item.name);
-    console.log(req.user.cartItems);
-		res.json(item);
+    if(req.body.name == "")
+  		res.json(null);
+  	else{
+      var a = {name:req.body,user:req.user.username};
+  		return (itemDB.addObj(a,res));
+  	}
 	}
 	else {
 		res.json(undefined);

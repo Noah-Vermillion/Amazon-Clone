@@ -4,7 +4,7 @@ function buttonClicked(){
   $.ajax({
     url: "/addUserItem",
     type: "POST",
-    data: {img: $('#image').attr("src"), price:$('#price').val(), name:$("#name").val() , desc:$("#desc").val()},
+    data: {name:$("#name").val()},
     success: function(data){
       if(!data)
         alert("NOT ADDED TO CART");
