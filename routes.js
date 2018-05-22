@@ -10,9 +10,7 @@ var mongoose = require("mongoose");
 var formidable = require('formidable');
 var fs = require('fs');
 const itemdatabase = require('./itemDatabase');
-const cartdatabase = require('./cartDatabase');
 var itemDB = new itemdatabase();
-var cartDB = new cartdatabase();
 
 /////////database items///////////////edited
 // itemDB.addItem({name:"Xbox One X", price: 449.99, desc:"Latest Gaming console from Microsoft" , img: "/images/xBox.jpg",category:"electronics"});
@@ -43,8 +41,6 @@ var cartDB = new cartdatabase();
 
 /////////////////////////////////
 
-
-
 //function ensureAuthenticated(req, res, next) {
 //  if (req.isAuthenticated()) {
 //    next();
@@ -62,9 +58,18 @@ router.use(function(req, res, next) {
 });
 
 let currCatg;
+let currSearch;
+let searchedSomething;
 router.get("/list/:catg",function(request,response){
 	currCatg = request.params.catg;
 	console.log("This is = " + currCatg);
+		response.sendFile(__dirname + "/public/views/List.html");
+});
+
+router.get("/list2/:catg",function(request,response){
+	currSearch = request.params.catg;
+	searchedSomething = true;
+	console.log("This is = " + currSearch);
 		response.sendFile(__dirname + "/public/views/List.html");
 });
 
@@ -205,7 +210,8 @@ console.log("post signup1");
     var newUser = new User({
       username: username,
       password: password,
-      cartItems: []
+      cartItems: ["Football", "Soccer"],
+      sellItems: []
     });
 console.log("post signup2");
 
@@ -245,9 +251,37 @@ router.get("/getItemDB", function(req,res){
 		return(itemDB.getAllItems(res));
 });
 
+router.get("/getItemDB/:search", function(req,res){
+		return(itemDB.searchItems(req.params.search,res));
+});
+
+
+
+
+
+
+
+
+
+
 router.get("/getCategory",function(req,res){//edited
 	res.json({category:currCatg});
 });
+
+router.get("/getSearch",function(req,res){//edited
+	res.json({search:currSearch});
+});
+
+router.get("/getifSearched",function(req,res){//edited
+	if(searchedSomething === true){
+		searchedSomething = false;
+		res.json({search:true, csearch:currSearch});
+	}else {
+		res.json({search:false, csearch:currSearch});
+	}
+});
+
+
 
 router.post("/updateItem",function(req,res){//edited
 	if(req.body.name == "" || req.body.price == "" || req.body.price <= 0 || req.body.desc == "")
@@ -325,12 +359,10 @@ router.post('/addUserItem', function(req, res){
 	if(req.isAuthenticated())
 	{
 		console.log("Inside addUserItem");
-    if(req.body.name == "")
-  		res.json(null);
-  	else{
-      var a = {name:req.body,user:req.user.username};
-  		return (itemDB.addObj(a,res));
-  	}
+		let item = {name: req.body.name , price: req.body.price,desc:req.body.desc,img:req.body.img,category:req.body.category};
+		req.user.cartItems.push(item.name);
+    console.log(req.user.cartItems);
+		res.json(item);
 	}
 	else {
 		res.json(undefined);
