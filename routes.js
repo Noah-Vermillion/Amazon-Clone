@@ -62,6 +62,17 @@ router.use(function(req, res, next) {
 });
 
 let currCatg;
+let currSearch;
+let searchedSomething;
+
+router.get("/list2/:catg",function(request,response){
+	currSearch = request.params.catg;
+	searchedSomething = true;
+	console.log("This is = " + currSearch);
+		response.sendFile(__dirname + "/public/views/List.html");
+});
+
+
 router.get("/list/:catg",function(request,response){
 	currCatg = request.params.catg;
 	// console.log("This is = " + currCatg);
@@ -250,6 +261,20 @@ router.get("/searchName", function(req,res){
 router.get("/getItemDB", function(req,res){
 		return(itemDB.getAllItems(res));
 });
+
+router.get("/getItemDB/:search", function(req,res){
+		return(itemDB.searchItems(req.params.search,res));
+});
+
+router.get("/getifSearched",function(req,res){//edited
+	if(searchedSomething === true){
+		searchedSomething = false;
+		res.json({search:true, csearch:currSearch});
+	}else {
+		res.json({search:false, csearch:currSearch});
+	}
+});
+
 
 router.get("/getCategory",function(req,res){//edited
 	res.json({category:currCatg});

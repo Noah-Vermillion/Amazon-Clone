@@ -20,6 +20,45 @@ function getCategory(){//edited
   return false;
 }
 
+function getifSearched(){//edited
+  $.ajax({
+    url: "/getifSearched",
+    type: "GET",
+    success: function(data){
+      if(!data)
+        alert("NO CATEGORY");
+      else{
+        if(data.search){
+          loadPage2(data.csearch);
+        }
+        else
+          getCategory();
+
+      }
+    }
+  });
+  return false;
+}
+
+function loadPage2(curr){
+ $.get("/getItemDB/" + curr,success);
+}
+
+function success(data){
+  console.log(data);
+  for(let i=0;i<data.length;i++){
+     if(data[i] != null || data[i] != undefined){
+        $("#list").append(
+              "<input id='"+ data[i].name +"' class='tempImg' type='image' src= "+ data[i].img +" height='200' width='200' border='5' onClick='changeCurr(this)'/>"
+              + "<p class='description'>"
+              + "Name: " + data[i].name + "<br>"
+              + "Price: $" + data[i].price + "<br>"
+              + "Desc: " + data[i].desc
+              + "</p><br>");
+     }
+  }
+}
+
 function loadPage(current){
   console.log("++++++++++++++ " + current);
   $.ajax({
@@ -63,6 +102,6 @@ $(document).ready(function(){
       $("#username").html( data.username);
     }
   });
-  getCategory();
+  getifSearched();
   // $('.tempImg').click(itemClicked);
 });
