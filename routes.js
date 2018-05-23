@@ -64,7 +64,7 @@ router.use(function(req, res, next) {
 let currCatg;
 router.get("/list/:catg",function(request,response){
 	currCatg = request.params.catg;
-	console.log("This is = " + currCatg);
+	// console.log("This is = " + currCatg);
 		response.sendFile(__dirname + "/public/views/List.html");
 });
 
@@ -80,7 +80,9 @@ router.get("/addItem",function(request,response){
 	response.sendFile(__dirname + "/public/views/addingItem.html");
 });
 
-router.get("/itemPage",function(request,response){
+let currItem;
+router.get("/itemPage/:name",function(request,response){
+	currItem = request.params.name;
 	response.sendFile(__dirname + "/public/views/itemPage.html");
 });
 
@@ -241,6 +243,10 @@ router.post("/submitItem",function(req,res){//edited
 
 });
 
+router.get("/searchName", function(req,res){
+		return(itemDB.getItem({name:currItem},res));
+});
+
 router.get("/getItemDB", function(req,res){
 		return(itemDB.getAllItems(res));
 });
@@ -263,24 +269,6 @@ router.get("/search",function(req,res){
 	return(itemDB.getAllItems(res));
 });
 
-router.get("/getCurrentItemInfo",function(req,res){
-	console.log("I want itemInfo of=" + itemDB.getCurrentItem());
-	if(itemDB.getItem(itemDB.getCurrentItem()) == false)
-		res.json(null);
-	else{
-		console.log("Im sending back= " + itemDB.getItem(itemDB.getCurrentItem()));
-		res.json(itemDB.getItem(itemDB.getCurrentItem()));
-	}
-});
-
-//changes the curent item clicked
-router.post("/loadItem",function(req,res){//edited
-	console.log("I set current Item=" + req.body.itemID);
-	if(itemDB.setCurrentItem(req.body.itemID))
-		res.json(itemDB.getCurrentItem());
-	else
-		res.json(null);
-});
 
 router.get("/loadItemPage",function(req,res){//edited
 	var itemInfo = itemDB.getAllItems();

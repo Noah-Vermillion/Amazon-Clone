@@ -17,7 +17,7 @@ myDatabase.prototype.addObj = function(obj,res){
 }
 
 myDatabase.prototype.getItem = function(obj,res){
-	Item.findOne({_id:obj.id},function(error,info){
+	Item.findOne({name:obj.name},function(error,info){
 		if(error){
 			return res.json(null);
 		} else{

@@ -1,5 +1,3 @@
-let idClicked;
-let currentCatg;
 
 function getCategory(){//edited
   console.log("I have loaded the page");
@@ -11,9 +9,9 @@ function getCategory(){//edited
       if(!data)
         alert("NO CATEGORY");
       else{
-        console.log(data);
-        currentCatg=data.category;
-        console.log("-------- " + currentCatg);
+        // console.log(data);
+        // currentCatg=data.category;
+        // console.log("-------- " + currentCatg);
         $("#resHeading").html("Results for " + data.category);
         loadPage(data.category);
       }
@@ -47,27 +45,15 @@ function loadPage(current){
 }
 
 function changeCurr(e){
-  console.log($(e).attr("id"));
-  idClicked = $(e).attr("id");
-  console.log(idClicked);
-  itemClicked();
+  // console.log($(e).attr("id"));
+  let idClicked = $(e).attr("id");
+  // console.log(idClicked);
+  itemClicked(idClicked);
 }
-function itemClicked(){
+function itemClicked(name){
   //directs you to a certain image's route
   // alert("redirect me");
-  $.ajax({
-    url: "/loadItem",
-    type: "POST",
-    data: {itemID:idClicked},
-    success: function(data){
-      if(!data)
-        alert("ERROR LOAD");
-      else
-        console.log("Good Load");
-    } ,
-    dataType: "json"
-  });
-  window.location = "itemPage";
+  window.location = "../itemPage/" + name;
 }
 
 $(document).ready(function(){
