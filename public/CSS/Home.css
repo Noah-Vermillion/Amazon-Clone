@@ -16,15 +16,7 @@
   .headerColor {
   background-color: rgb(7, 43, 99);
   margin-bottom: 20px;
-  height: 200px;
-  }
-  #search{
-    margin-top: 30px;
-    text-align:top;
-    position: relative;
-    overflow:hidden;
-    padding-top:.1%;
-    padding-bottom:.1%;
+  height: 230px;
   }
   #title{
     text-align:center;
@@ -45,7 +37,14 @@
 #headerList{
   text-align: center;
   margin-left: calc(50% - 290px);
+  margin-top: 25px;
 }
 #headerLogo{
 margin-left: calc(50% - 150px);
+}
+#searchBar{
+  width: 600px;
+  position: absolute;
+  top: 140px;
+  left: calc(50% - 300px);
 }
