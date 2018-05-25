@@ -13,10 +13,10 @@
   background-color: rgb(7, 43, 99)
 
   }
-  .headerColor {
-  background-color: rgb(7, 43, 99);
-  margin-bottom: 20px;
-  height: 200px;
+    .headerColor {
+    background-color: rgb(7, 43, 99);
+    margin-bottom: 20px;
+    height: 230px;
   }
   #search{
     margin-top: 30px;
@@ -44,8 +44,15 @@
   }
 #headerList{
   text-align: center;
-  margin-left: calc(50% - 290px);
+  margin-left: calc(50% - 305px);
+  margin-top: 25px;
 }
 #headerLogo{
 margin-left: calc(50% - 150px);
+}
+#searchBar{
+  width: 600px;
+  position: absolute;
+  top: 140px;
+  left: calc(50% - 300px);
 }
