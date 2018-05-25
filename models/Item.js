@@ -8,7 +8,10 @@ var itemSchema = mongoose.Schema({
 		unique: true,
 		type:String
 	},
-	
+	price:Number,
+	desc:String,
+	img:String,
+	category:String
 });
 
 var Items = mongoose.model("Items", itemSchema);

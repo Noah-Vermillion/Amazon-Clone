@@ -5,15 +5,16 @@
   		function userClicked(){
 
           $.post("/login",{username:$("#username").val(), password:$("#psw").val()},function(data)
-          {
-		           window.location = data.redirect;
-          });
+{
+		window.location = data.redirect;
+});
 
     			return false;
     		}
-function signupClicked(){
-  window.location = "signup";
-}
+
+        function signupClicked(){
+          window.location = "signup";
+        }
 
   		$(document).ready(function(){
 
@@ -33,6 +34,5 @@ function signupClicked(){
             }
         });
 
-      //  $("#createbutton").clicked(signupClicked);
 
   		});
