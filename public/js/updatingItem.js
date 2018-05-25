@@ -7,8 +7,13 @@ function previewFile(){
        // console.log(file.name);
 
        reader.onloadend = function () {
+         if (!tempSrc.includes(".png") && !tempSrc.includes(".jpg") && !tempSrc.includes(".tif") && !tempSrc.includes(".gif"))
+         {
+             preview.src = "/images/blankObject.png";
+         }
+         else {
            preview.src = reader.result;
-       }
+         }
 
        if (file) {
            reader.readAsDataURL(file); //reads the data as a URL
