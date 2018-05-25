@@ -1,3 +1,20 @@
+function buttonClicked(){
+  console.log($('#price').val());
+
+  $.ajax({
+    url: "/addUserItem",
+    type: "POST",
+    data: {name:"Football"},
+    success: function(data){
+      if(!data)
+        alert("NOT ADDED TO CART");
+      else{
+        alert("ADDED TO CART");
+      }
+    },
+    dataType: "json"
+  });
+}
 
 function logoutClicked(){
 //add or modify.  Do a get request on /logout and have the callback
@@ -49,4 +66,5 @@ $(document).ready(function(){
 		////////
 		$("#logout").click(logoutClicked);
 		$("#addItem").click(addItemClicked);
+		  $('#butn').click(buttonClicked);
 	});

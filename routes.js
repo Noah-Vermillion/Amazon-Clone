@@ -62,20 +62,9 @@ router.use(function(req, res, next) {
 });
 
 let currCatg;
-let currSearch;
-let searchedSomething;
-
-router.get("/list2/:catg",function(request,response){
-	currSearch = request.params.catg;
-	searchedSomething = true;
-	console.log("This is = " + currSearch);
-		response.sendFile(__dirname + "/public/views/List.html");
-});
-
-
 router.get("/list/:catg",function(request,response){
 	currCatg = request.params.catg;
-	// console.log("This is = " + currCatg);
+	console.log("This is = " + currCatg);
 		response.sendFile(__dirname + "/public/views/List.html");
 });
 
@@ -91,9 +80,7 @@ router.get("/addItem",function(request,response){
 	response.sendFile(__dirname + "/public/views/addingItem.html");
 });
 
-let currItem;
-router.get("/itemPage/:name",function(request,response){
-	currItem = request.params.name;
+router.get("/itemPage",function(request,response){
 	response.sendFile(__dirname + "/public/views/itemPage.html");
 });
 
@@ -218,7 +205,6 @@ console.log("post signup1");
     var newUser = new User({
       username: username,
       password: password,
-      cartItems: []
     });
 console.log("post signup2");
 
@@ -254,27 +240,9 @@ router.post("/submitItem",function(req,res){//edited
 
 });
 
-router.get("/searchName", function(req,res){
-		return(itemDB.getItem({name:currItem},res));
-});
-
 router.get("/getItemDB", function(req,res){
 		return(itemDB.getAllItems(res));
 });
-
-router.get("/getItemDB/:search", function(req,res){
-		return(itemDB.searchItems(req.params.search,res));
-});
-
-router.get("/getifSearched",function(req,res){//edited
-	if(searchedSomething === true){
-		searchedSomething = false;
-		res.json({search:true, csearch:currSearch});
-	}else {
-		res.json({search:false, csearch:currSearch});
-	}
-});
-
 
 router.get("/getCategory",function(req,res){//edited
 	res.json({category:currCatg});
@@ -294,6 +262,24 @@ router.get("/search",function(req,res){
 	return(itemDB.getAllItems(res));
 });
 
+router.get("/getCurrentItemInfo",function(req,res){
+	console.log("I want itemInfo of=" + itemDB.getCurrentItem());
+	if(itemDB.getItem(itemDB.getCurrentItem()) == false)
+		res.json(null);
+	else{
+		console.log("Im sending back= " + itemDB.getItem(itemDB.getCurrentItem()));
+		res.json(itemDB.getItem(itemDB.getCurrentItem()));
+	}
+});
+
+//changes the curent item clicked
+router.post("/loadItem",function(req,res){//edited
+	console.log("I set current Item=" + req.body.itemID);
+	if(itemDB.setCurrentItem(req.body.itemID))
+		res.json(itemDB.getCurrentItem());
+	else
+		res.json(null);
+});
 
 router.get("/loadItemPage",function(req,res){//edited
 	var itemInfo = itemDB.getAllItems();
@@ -341,8 +327,8 @@ router.post('/addUserItem', function(req, res){
     if(req.body.name == "")
   		res.json(null);
   	else{
-      var a = {name:req.body,user:req.user.username};
-  		return (itemDB.addObj(a,res));
+      var a = {name:req.body.name,user:req.user.username};
+  		return (cartDB.addObj(a,res));
   	}
 	}
 	else {
@@ -352,13 +338,32 @@ router.post('/addUserItem', function(req, res){
 
 router.get('/getUserItemList', function(req, res){
 	console.log("Inside getUserItemList");
-  var itemList = [];
-  for(let i=0; i< req.user.cartItem.length;i++){
-    itemList.push(req.user.cartItem[i]);
-  }
-  console.log(itemList);
-	res.json(req.user.cartItem);
+  return(cartDB.getAllItemsofUser({user:req.user.username},res));
+  // console.log(itemList);
+  // var objs = [];
+  // for(let i=0; i< itemList.length;i++){
+  //   var temp = itemDB.findOne(itemList[i].name);
+  //   objs.push(temp);
+  // }
+  // console.log(objs);
+	// res.json(objs);
 });
+router.get('/getUserItemData', function(req, res){
+  console.log("Inside getuserItemData");
+  console.log("-------" + req.query);
+  var objs = [];
+  for(let i=0; i<req.query.list.length;i++)
+  {
+
+    itemDB.getItem(req.query.list[i].name, res).then(function(data){
+      console.log(data);
+    //  objs.push(data);
+    });
+    console.log("Objs: " + objs);
+  }
+  console.log("Final Objs: " + objs);
+  return(res.json(objs));
+})
 
 /////////////////////////////////USERSELLITEM///////////////////////////////////
 

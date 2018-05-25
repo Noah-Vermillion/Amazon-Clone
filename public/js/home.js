@@ -4,8 +4,8 @@ $(document).ready(function(){
     if(data != null){
   		if (data.username){
         console.log("Inside get userinfo after sign in");
-  		//	$("#username").href="account";
-  			$("#username").val() = data.username;
+  			$("#username").attr('href' , "account");
+				$("#username").html( data.username);
   		}
       else{
         console.log("Not Inside userinfo after sign in");

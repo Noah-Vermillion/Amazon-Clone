@@ -1,3 +1,0 @@
-function GoHome () {
-	window.location = '/';
-}

@@ -102,6 +102,7 @@ function previewFile(){
         {
           console.log("I am changing the info");
           console.log(data.username);
+          $("#username").attr('href' , "account");
           $("#username").html( data.username);          // info.value = data.name;
         }
       },

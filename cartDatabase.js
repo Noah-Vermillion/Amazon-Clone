@@ -17,7 +17,7 @@ myDatabase.prototype.addObj = function(obj,res){
 }
 
 myDatabase.prototype.getItem = function(obj,res){
-	Cart.findOne({_id:obj.id},function(error,info){
+	Cart.findOne({user:obj.user},function(error,info){
 		if(error){
 			return res.json(null);
 		} else{
@@ -26,8 +26,9 @@ myDatabase.prototype.getItem = function(obj,res){
 	});
 }
 
-myDatabase.prototype.getAllItems = function(res){
-	Cart.find({}, function(error,info){
+myDatabase.prototype.getAllItemsofUser = function(obj,res){
+	console.log(obj);
+	Cart.find({user:obj.user}, function(error,info){
 		if(error){
 			return res.json(null);
 		} else {
@@ -35,6 +36,7 @@ myDatabase.prototype.getAllItems = function(res){
 			for (let i=0;i<info.length;i++){
 				objs.push(info[i]);
 			}
+			console.log("ppppp " + objs);
 			return res.json(objs);
 		}
 	});

@@ -1,4 +1,5 @@
 var Item = require("./models/Item");
+var Promise = require('promise');
 var mongoose = require("mongoose");
 
 var myDatabase = function(){
@@ -16,36 +17,17 @@ myDatabase.prototype.addObj = function(obj,res){
 	});
 }
 
-myDatabase.prototype.searchItems = function(obj,res){
-   Item.find({},function(error,info) {
-    if (error) {
-      return res.json(null);
-    } else {
-      let objs = [];
-      for (let i=0;i<info.length;i++) {
-        var str = info[i].name;
-        var str2 = obj;
-
-        if(str.search(str2)>-1)
-        objs.push(info[i]);
-
-
-      }
-      console.log("all items sent over " + objs);
-      return res.json(objs);
-    }
-  });
-}
-
-
 
 myDatabase.prototype.getItem = function(obj,res){
-	Item.findOne({name:obj.name},function(error,info){
-		if(error){
-			return res.json(null);
-		} else{
-			return res.json(info);
-		}
+	return new Promise(function(resolve,reject){
+		Item.findOne({name:obj},function(error,info){
+			if(error){
+				reject(error);
+			} else{
+				console.log("Info inside getItem: " + info);
+				resolve(info);
+			}
+		});
 	});
 }
 
