@@ -64,7 +64,6 @@ function previewFile(){
 
 
       $("form").submit(function(event){
-        console.log("The path fiel is = " + tempSrc);
         $.ajax({
           url: "/updateItem",
           type: "POST",

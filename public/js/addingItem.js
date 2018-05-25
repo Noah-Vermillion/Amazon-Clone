@@ -1,24 +1,3 @@
-// function submitItem(){
-//   console.log("I want to submit an item");
-//   $.ajax({
-//     url: "/submitItem",
-//     type: "POST",
-//     data: {name:$("#objName").val(), price:$("#objPrice").val(), desc:$("#objDesc").val(), img:$("#currImg").attr("src")},
-//     success: function(data){
-//       if (!data)
-//         alert("ERROR");
-//       else{
-//         $("#objName").val("");
-//         $("#objPrice").val("");
-//         $("#objDesc").val("");
-//         alert("SUBMIT VALID");
-//       }
-//     } ,
-//     dataType: "json"
-//   });
-//   return false;
-// }
-
 function testFunc(){
   console.log($("#currImg").attr('src'));
 }
@@ -29,11 +8,13 @@ function previewFile(){
        var reader  = new FileReader();
        tempSrc = "/images/" + file.name;
        // console.log(file.name);
-
+       if (!tempSrc.includes(".png") || !tempSrc.includes(".jpg") || !tempSrc.includes(".tif") || !tempSrc.includes(".gif"))
+       {
+       tempSrc = "/images/fridge";
        reader.onloadend = function () {
            preview.src = reader.result;
        }
-
+       }
        if (file) {
            reader.readAsDataURL(file); //reads the data as a URL
        } else {
@@ -45,6 +26,32 @@ function previewFile(){
     function()
     {
       $("form").submit(function(event){
+        if ($("#objName").val().includes("script>")){
+          var objName = $("#objName").val();
+          for (var i = 0; i < objName.length; i++) {
+            if (objName.charAt(i) == '<')
+            {
+              alert("ERROR SUBMIT");
+              return false;
+            }
+          }
+        }else {
+          var objName = $("#objName").val();
+        }
+
+        if ($("#objDesc").val().includes("script>")){
+          var objDesc = $("#objDesc").val();
+          for (var i = 0; i < objDesc.length; i++) {
+            if (objDesc.charAt(i) == '<')
+            {
+              alert("ERROR SUBMIT");
+              return false;
+            }
+          }
+        }else {
+          var objDesc = $("#objDesc").val();
+        }
+
         console.log("The path file is = " + tempSrc);
         if($("#fileStuff").val() == ""){
           alert("Insert an Img");
@@ -54,39 +61,39 @@ function previewFile(){
           url: "/submitItem",
           type: "POST",
           //add a path data to the img
-          data: {name:$("#objName").val(),
+          data: {name:objName,
                 price:$("#objPrice").val(),
-                desc:$("#objDesc").val(),
+                desc:objDesc,
                 img:tempSrc,
                 category:$("#objCategory").val()},
           success: function(data){
             if (!data){
               alert("ERROR SUBMIT");
-              }else{
+            }else{
               alert("SUBMIT VALID");
             }
           } ,
           dataType: "json"
         });
-        // $.ajax({
-        //   url: "/addUserSellItem",
-        //   type: "POST",
-        //   //add a path data to the img
-        //   data: {name:$("#objName").val(),
-        //         price:$("#objPrice").val(),
-        //         desc:$("#objDesc").val(),
-        //         img:tempSrc,
-        //         category:$("#objCategory").val()},
-        //   success: function(data){
-        //     if (!data){
-        //       alert("ERROR SUBMIT USER");
-        //       }else{
-        //         console.log("SUBMIT USER VALID");
-        //       // alert("SUBMIT VALID");
-        //     }
-        //   } ,
-        //   dataType: "json"
-        // });
+        $.ajax({
+          url: "/addUserSellItem",
+          type: "POST",
+          //add a path data to the img
+          data: {name:objName,
+                price:$("#objPrice").val(),
+                desc:objDesc,
+                img:tempSrc,
+                category:$("#objCategory").val()},
+          success: function(data){
+            if (!data){
+              alert("ERROR SUBMIT USER");
+              }else{
+                console.log("SUBMIT USER VALID");
+              // alert("SUBMIT VALID");
+            }
+          } ,
+          dataType: "json"
+        });
       });
       $.ajax({
       url: "/userInfo",
@@ -101,10 +108,15 @@ function previewFile(){
         else
         {
           console.log("I am changing the info");
-          console.log(data.username);
-          $("#username").html( data.username);          // info.value = data.name;
+          console.log(data.name);
+          document.getElementById("username").innerHTML = data.name;
+          // info.value = data.name;
         }
       },
       dataType: "json"
     });
     });
+
+    function GoHome() {
+      window.location = "/";
+    }
