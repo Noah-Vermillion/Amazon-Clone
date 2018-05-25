@@ -1,3 +1,3 @@
-function GoHome () {
-	window.location = '/';
+function GoHome() {
+  window.location = "/";
 }
