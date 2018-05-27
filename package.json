@@ -13,9 +13,12 @@
     "express": "5.0.0-alpha.2",
     "express-session": "^1.7.6",
     "formidable": "^1.2.1",
-    "mongoose": "^4.0.0",
+    "mongoose": "^4.13.14",
     "npm-scripts": "^1.4.0",
     "passport": "^0.2.0",
     "passport-local": "^1.0.0"
+  },
+  "scripts": {
+    "start": "node index.js"
   }
 }
