@@ -12,4 +12,21 @@ $(document).ready(function(){
       }
     }
 	});
+    $('#sports').click(sportsclicked);
+    $('#electronics').click(electronicsclicked);
+    $('#animals').click(animalsclicked());
+    $('#misc').click(miscclicked);
 });
+function sportsclicked() {
+
+}
+function electronicsclicked() {
+
+}
+function animalsclicked() {
+    console.log("heer");
+ window.location = $('#animals').attr('href');
+}
+function miscclicked() {
+
+}
