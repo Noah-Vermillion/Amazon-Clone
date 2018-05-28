@@ -9,6 +9,7 @@ function buttonClicked(){
       if(!data)
         alert("NOT ADDED TO CART");
       else{
+        console.log("data.image = " + data.image);
         alert("ADDED TO CART");
       }
     },
@@ -31,6 +32,7 @@ $(document).ready(function(){
       $("#desc").val(data.desc);
       $("#image").attr("src",data.img);
       console.log("Inside searchName name " + $("#name").val());
+      console.log("Inside searchName image src = "+ $("#image").attr("src") + " image val = " + $("#image").val());
     }
   });
 

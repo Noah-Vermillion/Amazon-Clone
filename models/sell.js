@@ -13,7 +13,7 @@ var sellSchema = mongoose.Schema({
 	},
 	price:Number,
 	desc:String,
-	img:String
+	image:String
 });
 
 var Sell = mongoose.model("Sell", sellSchema);

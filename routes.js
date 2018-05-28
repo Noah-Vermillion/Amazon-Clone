@@ -306,6 +306,7 @@ router.post('/addUserItem', function(req, res){
     }
   	else{
       console.log("req.body.name is not = to empty");
+      console.log("req.body.img = " + req.body.img);
       var a = {name:req.body.name,user:req.user.username,image:req.body.img,price:req.body.price,desc:req.body.dsc};
   		return (cartDB.addObj(a,res));
   	}
@@ -334,7 +335,7 @@ router.post('/addUserSellItem', function(req, res){
     }
   	else{
       console.log("req.body.name is not = to empty");
-      var a = {name:req.body.name,user:req.user.username,image:req.body.img,price:req.body.price,desc:req.body.dsc};
+      var a = {name:req.body.name,user:req.user.username,image:req.body.img,price:req.body.price,desc:req.body.desc};
   		return (sellDB.addObj(a,res));
   	}
 	}
