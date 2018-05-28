@@ -1,14 +1,9 @@
-if (isMobileDevice()) {
-	window.location.href = window.location + "/mobile";
-}
-
-
 function buttonClicked() {
 	console.log($('#price').val());
 
 
 	$.ajax({
-		url: "/addUserItem",
+		url: "../addUserItem",
 		type: "POST",
 		data: {
 			name: "Football",
@@ -39,11 +34,7 @@ function logoutClicked() {
 				alert("ERROR");
 			} else {
 				console.log("I am logging out");
-				if (isMobileDevice()) {
-					window.location.href = data.redirect + "/mobile";
-				} else {
-					window.location = data.redirect;
-				}
+				window.location = data.redirect;
 			}
 		},
 		dataType: "json"
@@ -51,7 +42,7 @@ function logoutClicked() {
 }
 
 function addItemClicked() {
-	window.location = "addItem";
+	window.location = "../addItem";
 }
 $(document).ready(function() {
 	$.ajax({

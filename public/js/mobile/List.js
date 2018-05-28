@@ -1,7 +1,3 @@
-if (isMobileDevice()) {
-  window.location.href = window.location + "/mobile";
-}
-
 function getCategory() { //edited
   console.log("I have loaded the page");
   $.ajax({
@@ -21,7 +17,7 @@ function getCategory() { //edited
           data.category = "Electronics";
         }
 
-        $("#resHeading").html("Results for " 
+        $("#resHeading").html("Results for " +
           data.category);
         loadPage(data.category);
       }
@@ -122,7 +118,7 @@ $(document).ready(function() {
   $.get("/userInfo", function(data) {
     if (data != null) {
       if (data.username) {
-        $("#username").attr('href', "../account");
+        $("#username").attr('href', "../../account");
         $("#username").html(data.username);
       }
     }

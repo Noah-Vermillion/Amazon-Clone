@@ -283,18 +283,6 @@ router.get("/mobile", function(req, res) {
   }
 });
 
-router.get("/userInfo/mobile", function(req, res) {
-  if (req.isAuthenticated()) {
-    res.json({
-      username: req.user.username
-    });
-  } else {
-    res.json(null);
-  }
-});
-
-
-
 router.get("/logout/mobile", function(req, res) {
   if (req.isAuthenticated()) {
     req.logout();
@@ -460,57 +448,57 @@ router.post('/fileupload', function(req, res) {
 /////////////////////////////////USERBUYITEM////////////////////////////////////
 
 router.post('/addUserItem', function(req, res) {
-      if (req.isAuthenticated()) {
-        if (req.body.name == "") {
-          console.log("req.body.name was equal to nothing");
-          res.json(null);
-        } else {
-          console.log("req.body.name is not = to empty");
-          var a = {
-            name: req.body.name,
-            user: req.user.username,
-            image: req.body.img,
-            price: req.body.price,
-            desc: req.body.dsc
-          };
-          return (cartDB.addObj(a, res));
-          else {
-            res.json(undefined);
-          }
-        });
+  if (req.isAuthenticated()) {
+    if (req.body.name == "") {
+      console.log("req.body.name was equal to nothing");
+      res.json(null);
+    } else {
+      console.log("req.body.name is not = to empty");
+      var a = {
+        name: req.body.name,
+        user: req.user.username,
+        image: req.body.img,
+        price: req.body.price,
+        desc: req.body.dsc
+      };
+      return (cartDB.addObj(a, res));
+    }
+  }
+});
 
-      router.get('/getUserItemList', function(req, res) {
-            return (cartDB.getAllItemsofUser({
-              user: req.user.username
-            }, res));
+router.get('/getUserItemList', function(req, res) {
+  return (cartDB.getAllItemsofUser({
+    user: req.user.username
+  }, res));
+});
 
-            /////////////////////////////////USERSELLITEM///////////////////////////////////
+/////////////////////////////////USERSELLITEM///////////////////////////////////
 
-            router.post('/addUserSellItem', function(req, res) {
-              if (req.isAuthenticated()) {
-                console.log("Inside addUserSellItem");
-                let item = {
-                  name: req.body.name,
-                  price: req.body.price,
-                  desc: req.body.desc,
-                  img: req.body.img,
-                  category: req.body.category
-                };
-                itemDB.addItem(item);
-                // let returnValue = DB.addUserSellItem(user, item);
-                // console.log(returnValue);
-                res.json(item);
-              } else {
-                res.json(undefined);
-              }
-            });
+router.post('/addUserSellItem', function(req, res) {
+  if (req.isAuthenticated()) {
+    console.log("Inside addUserSellItem");
+    let item = {
+      name: req.body.name,
+      price: req.body.price,
+      desc: req.body.desc,
+      img: req.body.img,
+      category: req.body.category
+    };
+    itemDB.addItem(item);
+    // let returnValue = DB.addUserSellItem(user, item);
+    // console.log(returnValue);
+    res.json(item);
+  } else {
+    res.json(undefined);
+  }
+});
 
-            router.get('/getUserSellItemList', function(req, res) {
-              return (sellDB.getAllItemsofUser({
-                user: req.user.username
-              }, res));
-            });
+router.get('/getUserSellItemList', function(req, res) {
+  return (sellDB.getAllItemsofUser({
+    user: req.user.username
+  }, res));
+});
 
 
 
-            module.exports = router;
+module.exports = router;
