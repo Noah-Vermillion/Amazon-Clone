@@ -38,6 +38,10 @@
   #create{
     overflow:auto;
   }
+    .container{
+      position: relative;
+      margin-left: calc(50% - 300px);
+    }
   .searchBar{
   min-width: 100px;
     width:55%;
@@ -45,14 +49,17 @@
 #headerList{
   text-align: center;
   margin-left: calc(50% - 305px);
-  margin-top: 25px;
+  margin-top: 15px;
+}
+body{
+   min-width:1315px;
+   width: auto;
 }
 #headerLogo{
-margin-left: calc(50% - 150px);
+margin-left: calc(50% - 196.55px);
 }
 #searchBar{
   width: 600px;
-  position: absolute;
-  top: 140px;
-  left: calc(50% - 300px);
+  margin-left: calc(50% - 300px);
+  margin-top: 10px;
 }

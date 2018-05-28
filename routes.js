@@ -14,46 +14,6 @@ const cartdatabase = require('./cartDatabase');
 var itemDB = new itemdatabase();
 var cartDB = new cartdatabase();
 
-/////////database items///////////////edited
-// itemDB.addItem({name:"Xbox One X", price: 449.99, desc:"Latest Gaming console from Microsoft" , img: "/images/xBox.jpg",category:"electronics"});
-// itemDB.addItem({name:"PS4Pro", price: 349.99, desc:"Latest Gaming console from Sony" , img: "/images/PS4.jpg",category:"electronics"});
-// itemDB.addItem({name:"PlayerUnkowns Battlgrounds", price: 59.99, desc:"Hit batle royale game." , img: "/images/PUBGitem.jpg",category:"misc"});
-// itemDB.addItem({name:"Battlefront 2", price: 59.99, desc:"Militaristic shooter from DICE." , img: "/images/badgame.jpg",category:"misc"});
-// itemDB.addItem({name:"Bed", price: 49.99, desc:"Twin Size Bed." , img: "/images/bed.jpg",category:"misc"});
-// itemDB.addItem({name:"Dresser", price: 69.99, desc:"Large dresser." , img: "/images/dresser.jpg",category:"misc"});
-// itemDB.addItem({name:"Refrigerator", price: 124.99, desc:"Nice Refrigerator." , img: "/images/fridge.jpg",category:"electronics",category:"electronics"});
-// itemDB.addItem({name:"Stove", price: 224.99, desc:"Nice Stove with 4 burners on top." , img: "/images/stove.jpg",category:"electronics"});
-// itemDB.addItem({name:"Iphone X", price: 899.99, desc:"Latest phone from Apple." , img: "/images/iphonex.jpg",category:"electronics"});
-// itemDB.addItem({name:"Iphone X case", price: 20.99, desc:"Case for the Iphone X." , img: "/images/iphonexcase.jpg",category:"misc"});
-// itemDB.addItem({name:"Android Phone", price: 69.99, desc:"Phone from android." , img: "/images/androidphone.jpg",category:"electronics"});
-// itemDB.addItem({name:"Google Pixel 2", price: 99.99, desc:"Latest phone from google." , img: "/images/googlepixel2.jpg",category:"electronics"});
-// itemDB.addItem({name:"Bedding", price: 20.99, desc:"Cheap Bedding" , img: "/images/bedding.jpg",category:"misc"});
-// itemDB.addItem({name:"Football", price: 10.99, desc:"Football" , img: "/images/football.jpg",category:"sports"});
-// itemDB.addItem({name:"Soccer Ball", price: 10.99, desc:"Soccor Ball" , img: "/images/soccerball.jpg",category:"sports"});
-// itemDB.addItem({name:"Basket ball", price: 12.99, desc:"Basketball" , img: "/images/basketball.jpg",category:"sports"});
-// itemDB.addItem({name:"Baseball", price: 7.99, desc:"Baseball" , img: "/images/baseball.jpg",category:"sports"});
-// itemDB.addItem({name:"Baseball Bat", price: 30.99, desc:"wooden baseball bat" , img: "/images/baseballbat.jpg	",category:"sports"});
-// itemDB.addItem({name:"Helmet", price: 5.99, desc:"bike helmet" , img: "/images/bikehelmet.jpg",category:"misc"});
-// itemDB.addItem({name:"Panda", price: 5000.99, desc:"Its so fluffy" , img: "/images/panda.jpg",category:"animals"});
-// itemDB.addItem({name:"Pegasus", price: 99999.99, desc:"You can fly with it" , img: "/images/pegasus.jpg",category:"animals"});
-// itemDB.addItem({name:"Tiger", price: 200.99, desc:"Rawr ;)" , img: "/images/tiger.jpg",category:"animals"});
-// itemDB.addItem({name:"Dragon", price: 5000.99, desc:"Nice pet to have" , img: "/images/dragon.jpg",category:"animals"});
-// itemDB.addItem({name:"Dog", price: 5.99, desc:"Dont Bother" , img: "/images/dog.jpg",category:"animals"});
-////////////////////////////////
-
-/////////////////////////////////
-
-
-
-//function ensureAuthenticated(req, res, next) {
-//  if (req.isAuthenticated()) {
-//    next();
-//  } else {
-//    req.flash("info", "You must be logged in to see this page.");
-//    res.redirect("/login");
-//  }
-//}
-
 router.use(function(req, res, next) {
   res.locals.currentUserjy = req.user;
   res.locals.errors = req.flash("error");

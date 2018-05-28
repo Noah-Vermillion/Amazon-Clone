@@ -14,7 +14,7 @@ var app = express();
 mongoose.connect("mongodb://localhost:27017/agorayeepsprtDB");
 setUpPassport();
 
-app.set("port", process.env.PORT || 3000);
+app.set("port", process.env.PORT || 4000);
 
 app.use('/', express.static('./'));
 app.use('/js', express.static('./public/js'));
