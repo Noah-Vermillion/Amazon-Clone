@@ -8,7 +8,7 @@ function buttonClicked() {
       name: $("#name").val(),
       img: $("#image").attr("src"),
       price: $("#price").val(),
-      dsc: $("#desc").val()
+      desc: $("#desc").val()
     },
     success: function(data) {
       if (!data)
@@ -74,5 +74,5 @@ $(document).ready(function() {
       }
     }
   });
-  $('#butn').click(buttonClicked);
+  $('#addbutn').click(buttonClicked);
 });
