@@ -1,7 +1,6 @@
 if (isMobileDevice()) {
   window.location.href = window.location + "/mobile";
 }
-
 function userClicked() {
   $.post("/login", {
     username: $("#username").val(),

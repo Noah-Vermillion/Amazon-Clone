@@ -21,7 +21,7 @@ function getCategory() { //edited
           data.category = "Electronics";
         }
 
-        $("#resHeading").html("Results for " +
+        $("#resHeading").html("Results for " 
           data.category);
         loadPage(data.category);
       }
