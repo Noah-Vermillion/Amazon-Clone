@@ -1,3 +1,6 @@
+if (isMobileDevice()) {
+  window.location.href = window.location + "/mobile";
+}
 function buttonClicked() {
   console.log("The objects price is " + $('#price').val());
   console.log("The objects name is " + $('#name').val());
