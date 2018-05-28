@@ -4,7 +4,7 @@ function buttonClicked(){
   $.ajax({
     url: "/addUserItem",
     type: "POST",
-    data: {name:"Football"},
+    data: {name:"Football",img:"/public/images/waifu1",price:9.99,dsc:"Hello"},
     success: function(data){
       if(!data)
         alert("NOT ADDED TO CART");
@@ -15,7 +15,6 @@ function buttonClicked(){
     dataType: "json"
   });
 }
-
 function logoutClicked(){
 //add or modify.  Do a get request on /logout and have the callback
 //                from the server redirect to /login.
@@ -66,5 +65,4 @@ $(document).ready(function(){
 		////////
 		$("#logout").click(logoutClicked);
 		$("#addItem").click(addItemClicked);
-		  $('#butn').click(buttonClicked);
 	});

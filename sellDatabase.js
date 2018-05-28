@@ -1,4 +1,4 @@
-var Cart = require("./models/cart");
+var Sell = require("./models/sell");
 var mongoose = require("mongoose");
 
 var myDatabase = function(){
@@ -6,9 +6,9 @@ var myDatabase = function(){
 }
 
 myDatabase.prototype.addObj = function(obj,res){
-	console.log("Inside CartDB.addobj");
+	console.log("Inside SellDB.addobj");
 	console.log(obj);
-	Cart.create(obj, function(error,info){
+	Sell.create(obj, function(error,info){
 		if(error){
 			return res.json(null);
 		} else {
@@ -18,7 +18,7 @@ myDatabase.prototype.addObj = function(obj,res){
 }
 
 myDatabase.prototype.getItem = function(obj,res){
-	Cart.findOne({user:obj.user},function(error,info){
+	Sell.findOne({user:obj.user},function(error,info){
 		if(error){
 			return res.json(null);
 		} else{
@@ -29,7 +29,7 @@ myDatabase.prototype.getItem = function(obj,res){
 
 myDatabase.prototype.getAllItemsofUser = function(obj,res){
 	console.log(obj);
-	Cart.find({user:obj.user}, function(error,info){
+	Sell.find({user:obj.user}, function(error,info){
 		if(error){
 			return res.json(null);
 		} else {
@@ -44,7 +44,7 @@ myDatabase.prototype.getAllItemsofUser = function(obj,res){
 }
 
 myDatabase.prototype.updateItem = function(obj,res){
-	Cart.findOneAndUpdate({name:obj.name},function(error,info){
+	Sell.findOneAndUpdate({name:obj.name},function(error,info){
 		if(error){
 			return res.json(null);
 		} else{

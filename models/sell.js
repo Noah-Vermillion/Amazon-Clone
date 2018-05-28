@@ -2,7 +2,7 @@
 
 var mongoose = require("mongoose");
 
-var cartSchema = mongoose.Schema({
+var sellSchema = mongoose.Schema({
 	name: {
 		required: true,
 		type:String
@@ -16,8 +16,8 @@ var cartSchema = mongoose.Schema({
 	img:String
 });
 
-var Cart = mongoose.model("Cart", cartSchema);
+var Sell = mongoose.model("Sell", sellSchema);
 
 
 
-module.exports = Cart;
+module.exports = Sell;

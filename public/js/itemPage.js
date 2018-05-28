@@ -1,10 +1,10 @@
 function buttonClicked(){
-  console.log($('#price').val());
-
+  console.log("The objects price is " + $('#price').val());
+  console.log("The objects name is " + $('#name').val());
   $.ajax({
     url: "/addUserItem",
     type: "POST",
-    data: {name:$("#name").val()},
+    data: {name:$("#name").val(),img:$("#image").attr("src"),price:$("#price").val(),dsc:$("#desc").val()},
     success: function(data){
       if(!data)
         alert("NOT ADDED TO CART");
@@ -17,30 +17,32 @@ function buttonClicked(){
 }
 
 $(document).ready(function(){
-  // $.ajax({
-  //   url: "/loadItemPage",
-  //   type: "GET",
-  //   success: function(data){
-  //     if(!data)
-  //       alert("NO ITEMINFO");
-  //     else{
-  //       console.log("I want to change the page data");
-  //       console.log('The data img=' + data.img);
-  //       $("#name").html(data.name);
-  //       $("#name").val(data.name);
-  //       $("#price").html(data.price);
-  //       $("#price").val(data.price);
-  //       $("#desc").html(data.desc);
-  //       $("#desc").val(data.desc);
-  //       $("#image").attr("src", data.img);
-  //     }
-  //   } ,
-  //   dataType: "json"
-  // });
+  $.get("/searchName",function(data){
+    if(!data)
+      alert("ERROR LOAD");
+    else{
+      // alert("LOADING ITEM");
+      console.log(data.name + " ++ " + data.price + " ++ " + data.desc);
+      $("#name").html(data.name);
+      $("#price").html(data.price);
+      $("#desc").html(data.desc);
+      $("#name").val(data.name);
+      $("#price").val(data.price);
+      $("#desc").val(data.desc);
+      $("#image").attr("src",data.img);
+      console.log("Inside searchName name " + $("#name").val());
+    }
+  });
+
+
   $.get("/userInfo",function(data){
-		if (data.username)
-    $("#username").attr('href' , "account");
-    $("#username").html( data.username);
+    if(data != null)
+    {
+      if (data.username){
+        $("#username").attr('href' , "../account");
+        $("#username").html( data.username);
+      }
+    }
 	});
   $('#butn').click(buttonClicked);
 });
