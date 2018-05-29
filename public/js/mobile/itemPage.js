@@ -1,9 +1,15 @@
+<<<<<<< HEAD
 function addbuttonClicked() {
+=======
+function buttonClicked() {
+  console.log($('#price').val());
+>>>>>>> ebd87bafb0dba71a53cbc986e5f3553b36f1ae52
 
   $.ajax({
     url: "/addUserItem",
     type: "POST",
     data: {
+<<<<<<< HEAD
       name: $("#name").val(),
       img: $("#image").attr("src"),
       price: $("#price").val(),
@@ -30,6 +36,9 @@ function updatebuttonClicked() {
       name: $("#name").val(),
       price: $("#price").val(),
       desc: $("#desc").val()
+=======
+      name: $("#name").val()
+>>>>>>> ebd87bafb0dba71a53cbc986e5f3553b36f1ae52
     },
     success: function(data) {
       if (!data)
@@ -50,6 +59,7 @@ $(document).ready(function() {
       // alert("LOADING ITEM");
       console.log(data.name + " ++ " + data.price + " ++ " + data.desc);
       $("#name").html(data.name);
+<<<<<<< HEAD
       $("#price").html("$ " + data.price);
       $("#desc").html(data.desc);
       $("#name").val(data.name);
@@ -58,17 +68,30 @@ $(document).ready(function() {
       $("#image").attr("src", data.img);
       $("#title").html(data.name);
       $("#title").val(data.name);
+=======
+      $("#price").html(data.price);
+      $("#desc").html(data.desc);
+      $("#image").attr("src", data.img);
+>>>>>>> ebd87bafb0dba71a53cbc986e5f3553b36f1ae52
     }
   });
 
   $.get("/userInfo", function(data) {
     if (data != null) {
       if (data.username) {
+<<<<<<< HEAD
         $("#username").attr('href', "/account");
+=======
+        $("#username").attr('href', "../../account");
+>>>>>>> ebd87bafb0dba71a53cbc986e5f3553b36f1ae52
         $("#username").html(data.username);
       }
     }
   });
+<<<<<<< HEAD
   $('#addbutn').click(addbuttonClicked);
   $('#updatebutn').click(updatebuttonClicked);
+=======
+  $('#butn').click(buttonClicked);
+>>>>>>> ebd87bafb0dba71a53cbc986e5f3553b36f1ae52
 });

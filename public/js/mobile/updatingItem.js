@@ -37,7 +37,11 @@
               console.log("I am changing the info");
               console.log(data.name);
               document.getElementById("name").innerHTML = data.name +
+<<<<<<< HEAD
                 "\'s account page";
+=======
+                " account page";
+>>>>>>> ebd87bafb0dba71a53cbc986e5f3553b36f1ae52
               // info.value = data.name;
             } else if (data.redirect) {
               document.getElementById("name").innerHTML = "Login";

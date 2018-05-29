@@ -6,6 +6,7 @@ function testFunc() {
   console.log($("#currImg").attr('src'));
 }
 let tempSrc;
+<<<<<<< HEAD
 
 function previewFile() {
   var preview = document.getElementById('currImg') //selects the query named img
@@ -13,6 +14,15 @@ function previewFile() {
   var reader = new FileReader();
   tempSrc = "/public/images/" + file.name;
 
+=======
+
+function previewFile() {
+  var preview = document.getElementById('currImg') //selects the query named img
+  var file = document.querySelector('input[type=file]').files[0]; //sames as here
+  var reader = new FileReader();
+  tempSrc = "/images/" + file.name;
+  // console.log(file.name);
+>>>>>>> ebd87bafb0dba71a53cbc986e5f3553b36f1ae52
   reader.onloadend = function() {
     if (!tempSrc.includes(".png") && !tempSrc.includes(".jpg") && !tempSrc.includes(
         ".tif") && !tempSrc.includes(".gif")) {
@@ -20,12 +30,21 @@ function previewFile() {
     } else {
       preview.src = reader.result;
     }
+<<<<<<< HEAD
   }
   if (file) {
     reader.readAsDataURL(file); //reads the data as a URL
   } else {
     preview.src = "";
   }
+=======
+  }
+  if (file) {
+    reader.readAsDataURL(file); //reads the data as a URL
+  } else {
+    preview.src = "";
+  }
+>>>>>>> ebd87bafb0dba71a53cbc986e5f3553b36f1ae52
 }
 
 $(document).ready(
@@ -121,3 +140,10 @@ $(document).ready(
       dataType: "json"
     });
   });
+<<<<<<< HEAD
+=======
+
+function GoHome() {
+  window.location = "/";
+}
+>>>>>>> ebd87bafb0dba71a53cbc986e5f3553b36f1ae52

@@ -1,11 +1,22 @@
+<<<<<<< HEAD
+=======
+function testFunc() {
+  console.log($("#currImg").attr('src'));
+}
+>>>>>>> ebd87bafb0dba71a53cbc986e5f3553b36f1ae52
 let tempSrc;
 
 function previewFile() {
   var preview = document.getElementById('currImg') //selects the query named img
   var file = document.querySelector('input[type=file]').files[0]; //sames as here
   var reader = new FileReader();
+<<<<<<< HEAD
   tempSrc = "/public/images/" + file.name;
 
+=======
+  tempSrc = "/images/" + file.name;
+  // console.log(file.name);
+>>>>>>> ebd87bafb0dba71a53cbc986e5f3553b36f1ae52
   reader.onloadend = function() {
     if (!tempSrc.includes(".png") && !tempSrc.includes(".jpg") && !tempSrc.includes(
         ".tif") && !tempSrc.includes(".gif")) {
@@ -95,6 +106,7 @@ $(document).ready(
         dataType: "json"
       });
     });
+<<<<<<< HEAD
     $.ajax({
       url: "/userInfo",
       type: "GET",
@@ -115,3 +127,18 @@ $(document).ready(
     });
   });
 
+=======
+    $.get("/userInfo", function(data) {
+      if (data != null) {
+        if (data.username) {
+          $("#username").attr('href', "../../account");
+          $("#username").html(data.username);
+        }
+      }
+    });
+  });
+
+function GoHome() {
+  window.location = "/";
+}
+>>>>>>> ebd87bafb0dba71a53cbc986e5f3553b36f1ae52

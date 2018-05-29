@@ -11,7 +11,11 @@ var cartSchema = mongoose.Schema({
 	},
 	price: Number,
 	desc: String,
+<<<<<<< HEAD
 	image: String
+=======
+	img: String
+>>>>>>> ebd87bafb0dba71a53cbc986e5f3553b36f1ae52
 });
 
 var Cart = mongoose.model("Cart", cartSchema);

@@ -1,4 +1,5 @@
 #name{
+<<<<<<< HEAD
   font-size:45px;
 }
 .cart{
@@ -20,4 +21,22 @@ position: relative;
 margin-right: 5%;
 width: 150;
 height: 75;
+=======
+}
+.cart{
+position: relative;
+margin-right: 1%;
+}
+#addItem{
+position: relative;
+margin-right: 1%;
+}
+.sell{
+position: relative;
+margin-right: 1%;
+}
+#logout{
+position: relative;
+margin-right: 1%;
+>>>>>>> ebd87bafb0dba71a53cbc986e5f3553b36f1ae52
 }

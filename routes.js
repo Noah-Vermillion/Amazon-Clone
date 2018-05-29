@@ -14,7 +14,10 @@ const cartdatabase = require('./cartDatabase');
 const selldatabase = require('./sellDatabase');
 var itemDB = new itemdatabase();
 var cartDB = new cartdatabase();
+<<<<<<< HEAD
 var sellDB = new selldatabase();
+=======
+>>>>>>> ebd87bafb0dba71a53cbc986e5f3553b36f1ae52
 
 router.use(function(req, res, next) {
   res.locals.currentUserjy = req.user;
@@ -395,7 +398,11 @@ router.post("/updateItem", function(req, res) { //edited
     res.json(null);
   else {
     itemDB.updateItem(req.body, res);
+<<<<<<< HEAD
 res.redirect("/updateItem");
+=======
+    res.json(req.body);
+>>>>>>> ebd87bafb0dba71a53cbc986e5f3553b36f1ae52
   }
 
 });
@@ -435,6 +442,7 @@ router.get("/loadItemPage", function(req, res) { //edited
 router.post('/fileupload', function(req, res) {
 
   var form = new formidable.IncomingForm();
+<<<<<<< HEAD
     form.parse(req, function (err, fields, files) {
       var oldpath = files.filetoupload.path;
       var newpath = __dirname + '/public/images/' + files.filetoupload.name;
@@ -444,6 +452,18 @@ router.post('/fileupload', function(req, res) {
     res.redirect("/addItem");
   });
 });
+=======
+  form.parse(req, function(err, fields, files) {
+    var oldpath = files.filetoupload.path;
+    var newpath = __dirname + '/public/images/' + files.filetoupload.name;
+
+    fs.rename(oldpath, newpath, function(err) {
+      if (err) throw err;
+
+      res.redirect("/addItem");
+    });
+  });
+>>>>>>> ebd87bafb0dba71a53cbc986e5f3553b36f1ae52
 });
 
 /////////////////////////////////USERBUYITEM////////////////////////////////////
@@ -460,7 +480,11 @@ router.post('/addUserItem', function(req, res) {
         user: req.user.username,
         image: req.body.img,
         price: req.body.price,
+<<<<<<< HEAD
         desc: req.body.desc
+=======
+        desc: req.body.dsc
+>>>>>>> ebd87bafb0dba71a53cbc986e5f3553b36f1ae52
       };
       return (cartDB.addObj(a, res));
     }
@@ -477,6 +501,7 @@ router.get('/getUserItemList', function(req, res) {
 
 router.post('/addUserSellItem', function(req, res) {
   if (req.isAuthenticated()) {
+<<<<<<< HEAD
     console.log("Inside addUserItem");
     console.log("req.body.name " + req.body.name);
     if (req.body.name == "") {
@@ -495,6 +520,21 @@ router.post('/addUserSellItem', function(req, res) {
     }
   } else {
     console.log("req.isAuthenticated is not true");
+=======
+    console.log("Inside addUserSellItem");
+    let item = {
+      name: req.body.name,
+      price: req.body.price,
+      desc: req.body.desc,
+      img: req.body.img,
+      category: req.body.category
+    };
+    itemDB.addItem(item);
+    // let returnValue = DB.addUserSellItem(user, item);
+    // console.log(returnValue);
+    res.json(item);
+  } else {
+>>>>>>> ebd87bafb0dba71a53cbc986e5f3553b36f1ae52
     res.json(undefined);
   }
 });

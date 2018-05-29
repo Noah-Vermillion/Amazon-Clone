@@ -1,3 +1,30 @@
+<<<<<<< HEAD
+=======
+function buttonClicked() {
+	console.log($('#price').val());
+
+
+	$.ajax({
+		url: "../addUserItem",
+		type: "POST",
+		data: {
+			name: "Football",
+			img: "/public/images/waifu1",
+			price: 9.99,
+			dsc: "Hello"
+		},
+		success: function(data) {
+			if (!data)
+				alert("NOT ADDED TO CART");
+			else {
+				alert("ADDED TO CART");
+			}
+		},
+		dataType: "json"
+	});
+}
+
+>>>>>>> ebd87bafb0dba71a53cbc986e5f3553b36f1ae52
 function logoutClicked() {
 	$.ajax({
 		url: "/logout",
@@ -33,7 +60,11 @@ $(document).ready(function() {
 			} else {
 				console.log("I am changing the info");
 				console.log(data.username);
+<<<<<<< HEAD
 				$("#name").html(data.username + "\'s account page");
+=======
+				$("#name").html(data.username + " account page");
+>>>>>>> ebd87bafb0dba71a53cbc986e5f3553b36f1ae52
 			}
 		},
 		dataType: "json"

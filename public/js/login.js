@@ -1,7 +1,10 @@
 if (isMobileDevice()) {
   window.location.href = window.location + "/mobile";
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> ebd87bafb0dba71a53cbc986e5f3553b36f1ae52
 function userClicked() {
   $.post("/login", {
     username: $("#username").val(),

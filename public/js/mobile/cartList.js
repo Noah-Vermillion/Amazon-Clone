@@ -56,7 +56,11 @@ $(document).ready(function() {
   $.get("/userInfo", function(data) {
     if (data != null) {
       if (data.username) {
+<<<<<<< HEAD
         $("#username").attr('href', "/account");
+=======
+        $("#username").attr('href', "../../account");
+>>>>>>> ebd87bafb0dba71a53cbc986e5f3553b36f1ae52
         $("#username").html(data.username);
       }
     }
